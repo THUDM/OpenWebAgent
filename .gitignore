@@ -1,0 +1,53 @@
+# local storage
+checkpoint/
+chrome/
+debug_info/
+env/
+files/
+logs/
+output/
+result/
+setting/
+src/
+temp/
+test/
+tmp/
+
+# large files
+trace.zip
+*.bin
+logs/
+
+# python cache
+*/__pycache__/
+**/__pycache__/
+
+# plugin dependencies
+node_modules
+/node_modules
+/.pnp
+.pnp.js
+
+# plugin testing
+/coverage
+
+# plugin production
+openwebagent-extension/
+
+*log*.txt
+config
+server/*.png
+
+# misc
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+yarn.lock
+package-lock.json
