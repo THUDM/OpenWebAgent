@@ -37,15 +37,13 @@ In fact, our plugin is ready-to-use, you can download `extension.zip` and unzip 
 
 ### Server
 
-1. First, you need to set up `config/server_config.yaml`.
+1. First, you need to set up `config/server_config.yaml`. For other models, see `server/README.md` for more details.
 
    ```yaml
    planner_args:
-     provider: "openai"							  # set it as api if you want to use api
-     model: "gpt-4-turbo-2024-04-09"   # set this into url if you use api model
-     n_workers: 2										  # for non-api models
-     base_urls: 
-       - "http://<your-url>"           # this is for api call
+     provider: "openai"
+     model: "gpt-4-turbo-2024-04-09"
+     n_workers: 2
    ```
 
 2. Configure your MongoDB Atlas, you can also save the data locally, but remember to update `config/mongo_config.yaml` to the configuration you are using.
