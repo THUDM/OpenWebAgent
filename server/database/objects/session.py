@@ -10,8 +10,6 @@ import datetime
 import os
 import io
 import json
-
-
 class Session(Document):
     session_id = StringField(required=True)
     # instructions = ListField(DictField())

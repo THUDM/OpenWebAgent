@@ -112,7 +112,7 @@ If you want to use different LLMs/LMMs to inference, you should:
        elif provider == "api":
            self.model = HttpModel(**kwargs)
        elif provider == "your-name"
-       		# TODO: you can add your model here
+           # TODO: you can add your model here
        else:
            raise Exception(f"Unsupported model provider: {provider}")
    ```

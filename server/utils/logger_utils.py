@@ -29,15 +29,9 @@ def setup_logger(app, log_path="./logs"):
     error_formatter = logging.Formatter('%(asctime)s - %(filename)s - %(lineno)d - %(levelname)s - %(message)s')
     error_handler.setFormatter(error_formatter)
     error_handler.rotator = _custom_rotating_file(error_handler.baseFilename, maxBytes=10*1024*1024)
-    
-    # console_handler = logging.StreamHandler()
-    # console_handler.setLevel(logging.DEBUG)
-    # console_formatter = logging.Formatter('%(name)s - %(levelname)s - %(message)s')
-    # console_handler.setFormatter(console_formatter)
 
     # add these handlers to Flask's app.logger
     app.logger.addHandler(info_handler)
     app.logger.addHandler(error_handler)
-    # app.logger.addHandler(console_handler)
     app.logger.setLevel(logging.DEBUG)
 

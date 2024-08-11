@@ -1,28 +1,19 @@
 import ast
-import requests
-from PIL import Image
 from colorama import Fore, Style
 
 def print_with_color(text: str, color="white"):
+    color_dict = {
+        "red": Fore.RED,
+        "green": Fore.GREEN,
+        "yellow": Fore.YELLOW,
+        "blue": Fore.BLUE,
+        "magenta": Fore.MAGENTA,
+        "cyan": Fore.CYAN,
+        "white": Fore.WHITE,
+        "black": Fore.BLACK
+    }
     text = str(text)
-    if color == "red":
-        print(Fore.RED + text)
-    elif color == "green":
-        print(Fore.GREEN + text)
-    elif color == "yellow":
-        print(Fore.YELLOW + text)
-    elif color == "blue":
-        print(Fore.BLUE + text)
-    elif color == "magenta":
-        print(Fore.MAGENTA + text)
-    elif color == "cyan":
-        print(Fore.CYAN + text)
-    elif color == "white":
-        print(Fore.WHITE + text)
-    elif color == "black":
-        print(Fore.BLACK + text)
-    else:
-        print(text)
+    print(color_dict.get(color, "") + text)
     print(Style.RESET_ALL)
 
 def format_bbox(bbox, image, window):
@@ -72,26 +63,26 @@ def parse_function_call(expression):
     kwargs = func_call.keywords
 
     for kw in kwargs:
-        if func_name == "do" and kw.arg == "action":
-            result["action"] = ast.literal_eval(kw.value)
-        elif func_name == "do" and kw.arg == "argument":
-            result["argument"] = ast.literal_eval(kw.value)
-        else:
-            if "kwargs" not in result:
-                result["kwargs"] = {}
-            if kw.arg == "element":
-                try:
-                    # for inner function
-                    inner_func = kw.value
-                    if isinstance(inner_func, ast.Call) and inner_func.func.id == 'find_element_by_instruction':
-                        for inner_kw in inner_func.keywords:
-                            if inner_kw.arg == "instruction":
-                                result["kwargs"]["instruction"] = ast.literal_eval(inner_kw.value)
-                    else:
-                        result["kwargs"][kw.arg] = ast.literal_eval(inner_func)
-                except Exception:
-                    result["kwargs"][kw.arg] = ast.literal_eval(kw.value)
-            else:
+        if func_name == "do" and kw.arg in ["action", "argument"]:
+            result[kw.arg] = ast.literal_eval(kw.value)
+            continue
+        
+        if "kwargs" not in result:
+            result["kwargs"] = {}
+        
+        if kw.arg == "element":
+            try:
+                # for inner function
+                inner_func = kw.value
+                if isinstance(inner_func, ast.Call) and inner_func.func.id == 'find_element_by_instruction':
+                    for inner_kw in inner_func.keywords:
+                        if inner_kw.arg == "instruction":
+                            result["kwargs"]["instruction"] = ast.literal_eval(inner_kw.value)
+                else:
+                    result["kwargs"][kw.arg] = ast.literal_eval(inner_func)
+            except Exception:
                 result["kwargs"][kw.arg] = ast.literal_eval(kw.value)
+        else:
+            result["kwargs"][kw.arg] = ast.literal_eval(kw.value)
 
     return result

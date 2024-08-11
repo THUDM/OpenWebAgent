@@ -1,0 +1,233 @@
+.ant-input-affix-wrapper {
+    padding: 8px 12px;
+    border-radius: 24px;
+}
+
+.query-input-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    // box-shadow: 1px 2px 20px rgb(0 0 0 / 6%);
+    // border-radius: 36px;
+    // border-color: rgba(48, 48, 48, 0.1);
+    color: #303030;
+    // padding: 12px;
+}
+
+.query-input {
+    height: 100%;
+    flex: 1;
+    outline: none !important;
+    border: none !important;
+
+    span {
+        background-color: #fff;
+        transition: background-color 0.2s;
+    }
+}
+
+
+.chat-input {
+    position: relative;
+    // z-index: 501;
+    width: 100%;
+    max-width: 720px;
+    // padding: 6px 12px 0;
+    flex-direction: column;
+
+    .input-wrapper {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        position: relative;
+        border-radius: 12px;
+        transition: border-color .2s;
+        border: 1.5px solid rgba(79,89,102,0.08);
+        display: flex;
+        flex-direction: column;
+
+        .input-box {
+            padding: 12px 12px 0;
+            flex: 1;
+            min-height: 0;
+
+            .textarea {
+                padding: initial !important;
+                background-color: transparent !important;
+                border: initial !important;
+                border-radius: 0 !important;
+                border-radius: initial !important;
+                transition: height 0s;
+            }
+        }
+    }
+
+    .input-box:focus-without {
+        border-color: rgba(79,89,102,0.08);
+    }
+
+    .input-box:focus-without .textarea {
+        border-color: rgba(79,89,102,0.08);
+    }
+
+    .input-box:focus-without .textarea:focus {
+        border-color: rgba(79,89,102,0.08);
+    }
+
+    .input-wrapper:hover {
+        border-color: #40a9ff;
+    }
+
+    .input-wrapper:focus-within {
+        border-color: #40a9ff;
+    }
+
+    .input-wrapper:focus-within .textarea {
+        border-color: #40a9ff;
+    }
+
+    .input-wrapper:focus-within .textarea:focus {
+        border-color: #40a9ff;
+    }
+}
+
+.sender {
+    display: flex;
+    padding-right: 12px;
+    height: 32px;
+    align-items: center;
+    // justify-content: flex-end;
+
+    .input-instruction {
+        display: flex;
+        width: 100px;
+        font-size: 14px;
+        align-items: center;
+        height: 100%;
+        padding-left: 6px;
+        color: #c0c5cc;
+        cursor: pointer;
+    }
+
+    .input-instruction.active {
+        color: #6841ea;
+    }
+
+    .input-inside-actions {
+        display: flex;
+        flex: 1;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        height: 32px;
+        min-height: 32px;
+        padding-left: 6px;
+        // justify-content: left;
+        gap: 6px;
+    }
+
+    .input-msg-btn {
+        width: 28px;
+        height: 28px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        display: inline-flex;
+        border-radius: 8px;
+        cursor: pointer;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+        -webkit-user-drag: none;
+        -webkit-tap-highlight-color: transparent;
+        margin-right: -6px;
+        color: #c0c5cc;
+    }
+
+    .input-msg-btn.active {
+        color: #6841ea;
+    }
+
+    .input-msg-btn:hover {
+        background-color: rgba(79,89,102,.078);
+    }
+}
+
+.chat-toolbar {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+
+    .chat-toolbar-left {
+        flex: 1;
+        min-width: 0;
+        gap: 2px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        justify-content: left;
+        color: #c0c5cc;
+        cursor: pointer;
+        font-size: 14px;
+
+        .input-instruction {
+            display: flex;
+            width: 120px;
+            font-size: 14px;
+            align-items: center;
+            height: 100%;
+            padding-left: 6px;
+            color: #c0c5cc;
+            cursor: pointer;
+        }
+    
+        .input-instruction.active {
+            color: #6841ea;
+        }
+    }
+
+    // .chat-toolbar-left:hover {
+    //     color: #6841ea;
+    // }
+
+    .chat-toolbar-left.active {
+        color: #6841ea;
+    }
+
+    .chat-toolbar-left.recoverActive {
+        color: rgb(43, 125, 43);
+    }
+
+    .chat-toolbar-right {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 2px;
+        justify-content: right;
+
+        .chat-toolbar-item {
+            position: relative;
+            // color: #222226;
+            color: #6841ea;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            display: inline-flex;
+            border-radius: 8px;
+            cursor: pointer;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+            -webkit-user-drag: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+    }
+}

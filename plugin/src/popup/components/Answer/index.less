@@ -1,0 +1,35 @@
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.result-tabs.ant-tabs > .ant-tabs-nav .ant-tabs-nav-wrap {
+    flex-direction: row-reverse;
+}
+
+.answer-loading-after {
+    &::after {
+        text-align: start;
+        white-space: break-spaces;
+        content: "";
+        width: 10px;
+        height: 20px;
+        background-color: #111827;
+        animation: blink 1s ease-in-out infinite;
+        display: inline-block;
+        vertical-align: text-bottom;
+    }
+}
+
+.multiline-tag {
+    white-space: normal;
+    word-wrap: break-word;
+    max-width: 100%; /* you can modify it to fulfill your need */
+}

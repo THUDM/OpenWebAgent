@@ -9,9 +9,8 @@ import traceback
 
 from PIL import Image
 from io import BytesIO
-from typing import Dict
+from typing import Dict, List
 from functools import partial
-from collections import defaultdict
 
 
 from flask import Response, Flask, request, jsonify
@@ -25,16 +24,16 @@ from args.server_parser import parse_all_arguments
 from utils.utils import print_with_color, parse_function_call, format_bbox
 
 class ResourceManager:
-    def __init__(self, resources: Dict):
+    def __init__(self, resources: List):
         self.resources = resources
         assert len(resources) > 0
         self._next_index = 0
         self._lock = threading.Lock()
 
-    def get_resource(self, agent_name: str):
+    def get_resource(self):
         with self._lock:
-            res = self.resources[agent_name][self._next_index]
-            self._next_index = (self._next_index + 1) % len(self.resources[agent_name])
+            res = self.resources[self._next_index]
+            self._next_index = (self._next_index + 1) % len(self.resources)
         return res
 
 class WebServer:
@@ -44,14 +43,13 @@ class WebServer:
         self.app.add_url_rule("/v1/controller", "controller", self.controller_endpoint, methods=["POST"])
 
         self.agents = agents
-        self.agent_name = 'web'
         self.logger = DemoLogger()
 
     def run(self, host: str, port: int, debug: bool = False) -> None:
         self.app.run(host=host, port=port, debug=debug)
 
-    def log(self, value):
-        self.logger(value, use_threading=False)
+    def log(self, value: Dict) -> None:
+        self.logger(value)
     
     def controller_endpoint(self):
         """
@@ -111,7 +109,7 @@ class WebServer:
         
         # TODO: add your own pipeline here
         try:
-            agent = self.agents.get_resource(self.agent_name)
+            agent = self.agents.get_resource()
             rsp = agent.call_act(instruction, session.turns, html_text, round_count)
         except Exception as e:
             app.logger.error("session id: %s, request id: %s, round: %d" % (session_id, request_id, round_count))
@@ -147,20 +145,18 @@ if __name__ == '__main__':
         "proxies": None,
     }
     
-    planner_args, _ = parse_all_arguments()
+    planner_args = parse_all_arguments()
     print(planner_args)
 
     app = Flask(__name__)
     app.config['JSON_AS_ASCII'] = False
-
-    agents = defaultdict(list)
-    planner_urls = planner_args.base_urls
-    planner_urls = planner_urls if planner_urls else []
+    
+    planner_urls = planner_args.base_urls if planner_args.base_urls else []
     planner_urls = planner_urls if len(planner_urls) else ["" for _ in range(planner_args.n_workers)]
     
-    for _, planner_url in enumerate(planner_urls):
-        agent_name = 'web'
-        agents[agent_name].append(AgentModel(planner_args, planner_url=planner_url, **agent_configs))
+    agents = []
+    for planner_url in planner_urls:
+        agents.append(AgentModel(planner_args, planner_url=planner_url, **agent_configs))
     
     server = WebServer(app, ResourceManager(agents))
     server.run("0.0.0.0", 24080, debug=True)

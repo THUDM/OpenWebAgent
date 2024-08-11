@@ -2,8 +2,6 @@ from mongoengine import *
 from datetime import datetime
 from io import BytesIO, IOBase
 
-
-
 class Turn(Document):
     # Content fields
     request_id = StringField()

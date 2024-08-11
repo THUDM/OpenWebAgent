@@ -8,7 +8,6 @@ logs/
 output/
 result/
 setting/
-src/
 temp/
 test/
 tmp/
@@ -35,8 +34,8 @@ node_modules
 openwebagent-extension/
 
 *log*.txt
-config
 server/*.png
+server/config
 
 # misc
 .DS_Store

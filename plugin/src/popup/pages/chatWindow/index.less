@@ -1,0 +1,228 @@
+.chat-window {
+    display: flex;
+    width: 100%;
+    background: var(--common-white);
+
+    .chat-box {
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        .scroll-view {
+            width: 100%;
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto !important;
+            overscroll-behavior: contain;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .chat-input {
+            position: relative;
+            z-index: 501;
+            width: 100%;
+            max-width: 720px;
+            padding: 6px 12px 0;
+            flex-direction: column;
+
+            .input-wrapper {
+                margin-top: 10px;
+                margin-bottom: 10px;
+                position: relative;
+                border-radius: 12px;
+                transition: border-color .2s;
+                border: 1.5px solid rgba(79,89,102,0.08);
+                display: flex;
+                flex-direction: column;
+
+                .input-box {
+                    padding: 12px 12px 0;
+                    flex: 1;
+                    min-height: 0;
+
+                    .textarea {
+                        padding: initial !important;
+                        background-color: transparent !important;
+                        border: initial !important;
+                        border-radius: 0 !important;
+                        border-radius: initial !important;
+                        transition: height 0s;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.chat-toolbar {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.message-items {
+    max-width: 720px;
+    padding: 20px 12px 80px;
+    width: 100%;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.loading,
+.loading > div {
+  position: relative;
+  box-sizing: border-box;
+}
+
+.loading {
+  display: block;
+  font-size: 0;
+  color: #000;
+}
+
+.loading.la-dark {
+  color: #333;
+}
+
+.loading > div {
+  display: inline-block;
+  float: none;
+  background-color: currentColor;
+  border: 0 solid currentColor;
+}
+
+.loading {
+  width: 42px;
+  height: 28px;
+}
+
+.loading > div:nth-child(1) {
+  position: absolute;
+  bottom: 32%;
+  left: 18%;
+  width: 14px;
+  height: 14px;
+  border-radius: 100%;
+  transform-origin: center bottom;
+  animation: ball-climbing-dot-jump 0.6s ease-in-out infinite;
+}
+
+.loading > div:not(:nth-child(1)) {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 14px;
+  height: 2px;
+  border-radius: 0;
+  transform: translate(60%, 0);
+  animation: ball-climbing-dot-steps 1.8s linear infinite;
+}
+
+.loading > div:not(:nth-child(1)):nth-child(2) {
+  animation-delay: 0ms;
+}
+
+.loading > div:not(:nth-child(1)):nth-child(3) {
+  animation-delay: -600ms;
+}
+
+.loading > div:not(:nth-child(1)):nth-child(4) {
+  animation-delay: -1200ms;
+}
+
+@keyframes ball-climbing-dot-jump {
+  0% {
+    transform: scale(1, 0.7);
+  }
+
+  20% {
+    transform: scale(0.7, 1.2);
+  }
+
+  40% {
+    transform: scale(1, 1);
+  }
+
+  50% {
+    bottom: 125%;
+  }
+
+  46% {
+    transform: scale(1, 1);
+  }
+
+  80% {
+    transform: scale(0.7, 1.2);
+  }
+
+  90% {
+    transform: scale(0.7, 1.2);
+  }
+
+  100% {
+    transform: scale(1, 0.7);
+  }
+}
+
+@keyframes ball-climbing-dot-steps {
+  0% {
+    top: 0;
+    right: 0;
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    top: 100%;
+    right: 100%;
+    opacity: 0;
+  }
+}
+
+
+.multiline-tag {
+    white-space: normal;
+    word-wrap: break-word;
+    max-width: 100%; /* 根据需要调整宽度 */
+}
+
+.tag-small {
+    font-size: 12px;
+    // padding: 4px 8px;
+  }
+  
+  .tag-medium {
+    font-size: 14px;
+    // padding: 6px 12px;
+  }
+  
+  .tag-large {
+    font-size: 16px;
+    // padding: 8px 16px;
+  }
+
+  .custom-spin .ant-spin-dot {
+    color: white;
+  }
+  
+  .custom-spin .ant-spin-dot i {
+    background-color: white;
+  }
+
+  .history-panel .ant-collapse-header {
+    color: #fff !important;
+    padding: 0 !important;
+  }

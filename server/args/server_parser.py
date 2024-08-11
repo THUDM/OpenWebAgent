@@ -4,7 +4,7 @@ import yaml
 from dataclasses import dataclass, field, asdict, fields
 from typing import Optional, List, Dict, Any
 
-from .args import PlannerArguments, ParseElementArguments
+from .args import PlannerArguments
 
 @dataclass
 class TextOnlyWebTaskConfig:
@@ -38,12 +38,9 @@ def parse_arguments() -> argparse.Namespace:
 
     return parser.parse_args()
 
-def parse_all_arguments() -> tuple[PlannerArguments, ParseElementArguments]:
+def parse_all_arguments() -> PlannerArguments:
     args = parse_arguments()
-
     file_config = load_config(args.config_path)
-
     planner_args = PlannerArguments(**file_config['planner_args'])
-    parse_element_args = ParseElementArguments(**file_config.get('parse_element_args', {}))
 
-    return planner_args, parse_element_args
+    return planner_args
